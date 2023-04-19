@@ -1,0 +1,22 @@
+[
+    {
+        "label": "CourseName",
+        "name": "CourseName",
+        "error": "CourseName",
+        "helper": "Course Name",
+        "pattern": "/^[A-z]+[a-z]+\\s*/",
+        "required": "Enter the Course Name",
+        "message": "Fisrt letter must be in captial",
+        "placeholder": "Course Name"
+    },
+    {
+        "label": "Fees",
+        "name": "Fees",
+        "error": "Fees",
+        "helper": "Fees",
+        "pattern": "/^[0-9]+/",
+        "required": "Enter the Course Fees",
+        "message": "Fisrt letter must be in captial",
+        "placeholder": "Fees"
+    }
+]

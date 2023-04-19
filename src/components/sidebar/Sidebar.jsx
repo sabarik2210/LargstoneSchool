@@ -13,7 +13,7 @@ const SidebarItem = props => {
     const active = props.active ? 'active' : ''
 
     return (
-        <div className="sidebar__item">
+        <div className="sidebar__item" >
             <div className={`sidebar__item-inner ${active}`}>
                 <i className={props.icon}></i>
                 <span>
@@ -26,7 +26,7 @@ const SidebarItem = props => {
 
 const Sidebar = props => {
 
-    const activeItem = sidebar_items.findIndex(item => item.route === props.location.pathname)
+    const activeItem = sidebar_items.findIndex(item => item.route === props.location.pathname || item.path_active === props.location.pathname)
 
     return (
         <div className='sidebar'>

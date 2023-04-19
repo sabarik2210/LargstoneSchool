@@ -37,7 +37,7 @@ const renderUserToggle = (user) => (
     </div>
 )
 
-const renderUserMenu =(item, index) => (
+const renderUserMenu = (item, index) => (
     <Link to='/' key={index}>
         <div className="notification-item">
             <i className={item.icon}></i>
@@ -48,11 +48,11 @@ const renderUserMenu =(item, index) => (
 
 const Topnav = () => {
     return (
-        <div className='topnav'>
-            <div className="topnav__search">
+        <div className='topnav' >
+            {/* <div className="topnav__search">
                 <input type="text" placeholder='Search here...' />
                 <i className='bx bx-search'></i>
-            </div>
+            </div> */}
             <div className="topnav__right">
                 <div className="topnav__right-item">
                     {/* dropdown here */}
@@ -73,7 +73,7 @@ const Topnav = () => {
                     {/* dropdown here */}
                 </div>
                 <div className="topnav__right-item">
-                    <ThemeMenu/>
+                    <ThemeMenu />
                 </div>
             </div>
         </div>
