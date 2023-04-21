@@ -79,7 +79,7 @@ function Courses() {
     }
     Courses.prototype.Viewbyid = function (req, cbk) {
         let query = `select * from courses where CourseID=?`
-        course_schema.viewByID(query, req.body.CourseID, function (err, result) {
+        course_schema.Viewbyid(query, req.body.CourseID, function (err, result) {
             if (err) {
                 cbk({ 'status': false, 'message': err })
             }

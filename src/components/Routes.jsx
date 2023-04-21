@@ -20,7 +20,6 @@ const Routes = () => {
             <Route path='/' exact component={Dashboard} />
             <Route path='/customers' exact component={Customers} />
             <Route path='/Students' exact component={Students} />
-            <Route path='/Students/StudentsForm' exact component={RegisterForm} />
 
 
             <Route path='/Courses/CoursesForm' exact component={CourseForm} />
@@ -31,6 +30,9 @@ const Routes = () => {
 
             <Route path='/Batch/BatchForm' exact component={BatchForm} />
             <Route path='/Batch/BatchForm/:action/:id' exact component={BatchForm} />
+
+            <Route path='/Students/StudentsForm' exact component={RegisterForm} />
+            <Route path='/Students/StudentsForm/:action/:id' exact component={RegisterForm} />
 
             <Route path='/Invoice' exact component={InvoiceTable} />
             <Route path='/Courses' exact component={CoursesTable} />

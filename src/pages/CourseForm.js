@@ -103,7 +103,7 @@ export default function CourseForm() {
 
 
     let con = " "
-    Subjects.map(d => con += d.title + ',')
+    Subject.map(d => con += d.title + ',')
     Courses.Subjects = con;
 
     const { register, handleSubmit, watch, formState: { errors } } = useForm();

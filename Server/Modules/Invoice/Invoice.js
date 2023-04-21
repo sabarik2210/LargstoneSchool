@@ -78,7 +78,7 @@ function Invoice() {
     }
     Invoice.prototype.Viewbyid = function (req, cbk) {
         let query = `select * from Invoice where InvoiceID=?`
-        invoice_schema.viewByID(query, req.body.InvoiceID, function (err, result) {
+        invoice_schema.Viewbyid(query, req.body.InvoiceID, function (err, result) {
             if (err) {
                 cbk({ 'status': false, 'message': err })
             }

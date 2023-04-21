@@ -18,6 +18,7 @@ export default function PrintPage() {
     const [Address, setAddress] = useState([{ "doornum": "", "street": "", "place": "" }]);
     const [row1, setrow] = useState([])
     const [PrintPageForm, setPrintPage] = useState('')
+    console.log(PrintPageForm);
     const [BatchName, setBatchName] = useState('')
     const [CourseName, setCourseName] = useState('')
 
@@ -39,7 +40,11 @@ export default function PrintPage() {
             <Typography>Tenkasi-627803.</Typography>
         </Box>
     );
-
+    useEffect(() => {
+        instance.post('Courses/view').then((res) => {
+            // console.log(res.data.message.messaage.message[0])
+        })
+    })
     const Read = () => {
         instance.post("invoice/viewbyid", { InvoiceID: parseInt(params.id) }).then((res) => {
             console.log(res.data);
@@ -54,7 +59,7 @@ export default function PrintPage() {
             setTotalAmount(res.data.message.message.message[0].TotalAmount)
             setpaymentMethod(res.data.message.message.message[0].paymentMethod)
             setInvoiceDate(res.data.message.message.message[0].InvoiceDate)
-            console.log(res.data.message.message.message[0]);
+            // console.log(res.data.message.message.message[0]);
         })
     };
 
@@ -127,6 +132,7 @@ export default function PrintPage() {
         { InvoiceID: '', CourseName: '', Term: 'Discount', Discount: Discount, TermAmount: Discount },
         { InvoiceID: 3, CourseName: '', Term: 'Total Amount', Discount: Discount, TermAmount: TotalAmount },
     ]
+
     let componentRef = useRef();
 
     useEffect(() => {

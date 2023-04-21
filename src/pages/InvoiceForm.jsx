@@ -15,11 +15,11 @@ import instance from "./Host";
 export default function Invoiceform() {
 
     const params = useParams()
-    console.log(params.id);
+
     const [Register, RegisterChange] = useState({});
-    console.log(Register);
+
     const [Batchlist, setBatchlist] = useState([])
-    console.log(Batchlist);
+
     const [entrolled, setEntrolled] = useState('')
     // console.log(entrolled);
     const [BatchName, setBatchName] = useState('')
@@ -32,7 +32,7 @@ export default function Invoiceform() {
     const [InvoiceDate, setInvoiceDate] = useState(moment(new Date()).format('DD-MM-YYYY'));
     const [TermAmount, setAdmissionFee] = useState('')
     const [Discount, setDiscount] = useState('')
-    console.log(PaymentMethod);
+
     // const [BatchStartingDate, setBatchStartingDate] = useState((moment(new Date()).format('YYYY-MM-DD')));
     const [InvoiceID, setinvoiceid] = useState(parseInt(params.id))
     const Amount = entrolled.AdmissionFees
@@ -51,18 +51,13 @@ export default function Invoiceform() {
     const obj = { InvoiceID, StudentName, CourseName, BatchName, TermAmount, InvoiceDate, Term, Discount, TotalAmount, PaymentMethod }
     console.log(obj);
     const OnSubmit = (data) => {
-        console.log('hii');
+
         if (params.action == 'update') {
             instance.post("invoice/update", obj)
-
-
         }
         else {
             instance.post("invoice/create", Register)
-
         }
-
-
     }
 
     useEffect(() => {

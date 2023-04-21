@@ -76,7 +76,7 @@ function Batch() {
     }
     Batch.prototype.Viewbyid = function (req, cbk) {
         let query = `select * from Batch where BatchID=?`
-        batch_schema.viewByID(query, req.body.BatchID, function (err, result) {
+        batch_schema.Viewbyid(query, req.body.BatchID, function (err, result) {
             if (err) {
                 cbk({ 'status': false, 'message': err })
             }

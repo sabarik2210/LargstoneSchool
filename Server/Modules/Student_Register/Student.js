@@ -63,7 +63,7 @@ function Students() {
     }
 
     Students.prototype.update = function (req, cbk) {
-        let StudentID = req.body.StudentID
+        let StudentID = req.body.studentID
         let query = `update  student set ? where StudentID=?`
         students_schema.update(query, [req.body, StudentID], function (err, result) {
             if (err) {
@@ -74,9 +74,9 @@ function Students() {
             }
         })
     }
-    Students.prototype.ViewbyID = function (req, cbk) {
+    Students.prototype.Viewbyid = function (req, cbk) {
         let query = `select * from student where StudentID=?`
-        students_schema.viewByID(query, req.body.StudentID, function (err, result) {
+        students_schema.Viewbyid(query, [req.body.studentID], function (err, result) {
             if (err) {
                 cbk({ 'status': false, 'message': err })
             }

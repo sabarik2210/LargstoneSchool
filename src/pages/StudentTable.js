@@ -1,16 +1,36 @@
-import React, { useEffect, useState } from 'react'
-import CommonTable from '../components/table/CommonTable'
-import axios from 'axios'
-import instance from './Host'
+import axios from 'axios';
+import * as React from 'react';
+import CommonTable from '../components/table/CommonTable';
+import { Button } from '@mui/material';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
+import { Link } from 'react-router-dom';
+import instance from './Host';
+
 
 
 const Students = () => {
 
-    const [Ans, setAns] = useState('')
-    useEffect(() => {
+    const [Ans, setAns] = React.useState('')
+
+
+
+    const view = (id) => {
+        localStorage.setItem('viewbtn', true)
+    }
+    const Edit = (id) => {
+        localStorage.setItem('viewbtn', false)
+    }
+    const Remove = (studentID) => {
+        // console.log(typeof (id));
+
+        instance.post('students/delete', { studentID })
+    }
+    React.useEffect(() => {
+        Remove()
         instance.post('students/view').then((res) => {
             setAns(res.data.message.message.message)
-            console.log(res.data);
         })
     }, [])
 
@@ -29,6 +49,31 @@ const Students = () => {
         { field: 'AdmissionFees', headerName: 'AdmissionFees', width: 140, headerClassName: 'super-app-theme--header', headerAlign: 'start' },
         { field: 'BatchName', headerName: 'BatchName', width: 80, headerClassName: 'super-app-theme--header', headerAlign: 'start' },
         { field: 'BatchStartingDate', headerName: 'BatchStartingDate', width: 160, headerClassName: 'super-app-theme--header', headerAlign: 'start' },
+        {
+            field: "Action",
+            width: 200,
+            headerClassName: "super-app-theme--header", headerAlign: 'start',
+            headerName: "Action",
+            sortable: false,
+            renderCell: (params) => {
+
+
+                return (
+                    <>
+                        <Link to={`/Students/StudentsForm/viewid/${params.row.studentID}`}>
+                            <Button onClick={() => view()} sx={{ justifyContent: 'start', color: 'lightgray', p: 0 }}><VisibilityIcon /></Button>
+                        </Link >
+
+                        <Link to={`/Students/StudentsForm/update/${params.row.studentID}`}>
+                            <Button onClick={() => Edit()} sx={{ justifyContent: 'start', color: 'blue', p: 0 }}><EditIcon /></Button>
+                        </Link>
+                        <Button onClick={() => Remove(params.row.studentID)} sx={{ justifyContent: 'start', color: 'red', p: 0 }}><DeleteIcon /></Button>
+                    </>
+                )
+
+            }
+        },
+
     ]
 
     // const rows = [
@@ -41,7 +86,7 @@ const Students = () => {
     // ]
 
     const rows = [...Ans]
-    console.log(rows)
+
 
     return (
         <div>

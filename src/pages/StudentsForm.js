@@ -32,7 +32,7 @@ export default function RegisterForm() {
 
     const [Details, setDetails] = useState({})
 
-    console.log(Details);
+    // console.log(Details);
 
     const [CourseView, setCourse] = useState([])
     const [view, setCourseView] = useState({})
@@ -55,6 +55,7 @@ export default function RegisterForm() {
     Details.BatchStartingDate = BatchBox.StartDate;
 
     const [StudentName, setStudentName] = useState("");
+
     const [StudentNumber, setStudentNumber] = useState("");
     const [Email, setEmail] = useState('');
     const [DateofBirth, setDateofBirth] = useState(moment(new Date()).format('YYYY-MM-DD'));
@@ -147,12 +148,43 @@ export default function RegisterForm() {
 
 
     const OnSubmit = (data) => {
-        instance.post("students/create", Details).then((res) => {
-            // res.data.result ? <Link to='/students' /> : alert(res.data.result);
-            console.log(res.data);
+        if (params.action == 'update') {
 
-        });
+            instance.post('students/update', Details).then((res) => {
+
+            })
+        }
+        else {
+            instance.post('students/create', Details).then((res) => {
+
+                // (res.data.message.message.message ? <Link to='/Courses'></Link> : alert('cancel'))
+            })
+        };
     };
+    useEffect(() => {
+        instance.post('students/view').then((res) => {
+
+        })
+        if (params.action == 'viewid') {
+            // setBtn(localStorage.getItem('viewbtn'))
+            instance.post('Students/viewbyid', { studentID: params.id }).then((res) => {
+                console.log(res.data);
+                setStudentName(res.data.message.message.message[0].StudentName)
+                // setFees(res.data.message.message.message[0].Fees)
+                // setSubjects(res.data.message.message.message[0].Subjects)
+                // setDuration(res.data.message.message.message[0].Duration)
+            })
+        }
+        else if (params.action == 'update') {
+            instance.post('Students/viewbyid', { studentID: params.id }).then((res) => {
+                setStudentName(res.data.message.message.message[0].StudentName)
+                // setFees(res.data.message.message.message[0].Fees)
+                // setSubjects(res.data.message.message.message[0].Subjects)
+                // setDuration(res.data.message.message.message[0].Duration)
+            })
+        }
+
+    }, [])
 
     useEffect(() => {
         instance.post('Courses/view').then((res) => {
@@ -176,7 +208,7 @@ export default function RegisterForm() {
                     </Grid>
 
                     <Grid item xs={10} md={3.5}>
-                        <TextField multiline
+                        <TextField multiline value={StudentName}
                             name='StudentName' {...register("StudentName", { required: "Enter the Student Name", maxLength: "20", })} error={Boolean(errors.StudentName)} helperText={errors.StudentName?.message} fullWidth onChange={(e) => (Details['StudentName'] = e.target.value)} size='small' label="Student Name" />
                     </Grid>
                     <Grid item xs={10} md={3.5}>
@@ -350,7 +382,7 @@ export default function RegisterForm() {
                     </Grid>
 
                     <Grid item xs={10} md={3.5}>
-                        <TextField multiline name='BatchStartingDate' InputLabelProps={{ shrink: true }} value={moment(BatchBox.StartDate).utc().format('YYYY-MM-DD')} {...register("BatchStartingDate", { required: "Enter the BatchStartingDate", })} fullWidth size='small' label="BatchStartingDate" />
+                        <TextField multiline name='BatchStartingDate' InputLabelProps={{ shrink: true }} value={BatchBox.StartDate || ''} {...register("BatchStartingDate", { required: "Enter the BatchStartingDate", })} fullWidth size='small' label="BatchStartingDate" />
                     </Grid>
                     <Grid item xs={10} md={3.5}>
                         <TextField multiline name='Session' value={BatchBox.Session || ''} fullWidth label="Session" size="small" onChange={(e) => setSession(e.target.value)}>

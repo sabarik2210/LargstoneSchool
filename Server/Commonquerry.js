@@ -61,7 +61,7 @@ common.prototype.update = function (query, content, id, cbk) {
     });
 };
 
-common.prototype.viewByID = function (query, id, cbk) {
+common.prototype.Viewbyid = function (query, id, cbk) {
     var self = this;
     self.table.query(query, id, function (err, result) {
         if (err) {

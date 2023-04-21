@@ -27,8 +27,9 @@ const CoursesTable = () => {
         instance.post('Courses/delete', { CourseID })
     }
     React.useEffect(() => {
-        Remove()
+
         instance.post('Courses/view').then((res) => {
+            console.log(res.data);
             setAns(res.data.message.message.message)
         })
     }, [])
