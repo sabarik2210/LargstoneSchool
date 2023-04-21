@@ -50,7 +50,7 @@ common.prototype.delete = function (query, id, cbk) {
 common.prototype.update = function (query, content, id, cbk) {
     var self = this;
     self.table.query(query, content, id, function (err, result) {
-        console.log(result);
+
         if (err) {
             cbk({ 'status': false, 'message': err })
 

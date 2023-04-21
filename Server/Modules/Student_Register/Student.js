@@ -66,6 +66,7 @@ function Students() {
         let StudentID = req.body.studentID
         let query = `update  student set ? where StudentID=?`
         students_schema.update(query, [req.body, StudentID], function (err, result) {
+
             if (err) {
                 cbk({ 'status': false, 'message': err })
             }
